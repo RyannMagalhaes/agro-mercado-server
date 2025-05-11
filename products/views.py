@@ -4,7 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework import status
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, DestroyAPIView
 
 # Create your views here.
 class ProductListView(APIView):
@@ -25,3 +25,15 @@ class ProductCreateView(CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED) #return the saved data
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) #return errors
  
+class ProductDeleteView(DestroyAPIView): #cria a view para deletar
+    renderer_classes = [JSONRenderer]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def perform_destroy(self, instance):
+        instance.delete()
