@@ -8,7 +8,7 @@ from .serializers import ProductSerializer
 from rest_framework.generics import CreateAPIView, DestroyAPIView
 
 class ProductListView(APIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     renderer_classes = [JSONRenderer] 
     def get(self, request):
         products = Product.objects.all()
@@ -16,7 +16,7 @@ class ProductListView(APIView):
         return Response(serializer.data)
     
 class ProductCreateView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     renderer_classes = [JSONRenderer]
     serializer_class = ProductSerializer  
     
@@ -28,7 +28,7 @@ class ProductCreateView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
  
 class ProductDeleteView(DestroyAPIView): 
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     renderer_classes = [JSONRenderer]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
