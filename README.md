@@ -60,6 +60,7 @@ O projeto inclui uma bateria de testes automatizados:
 - execute o comando: o comando: pip install -r requirements.txt
 - execute as migrations: python manage.py migrate
 - inicie a aplicacao: python manage.py runserver
+- por padrao, as credenciais de usuario cadastradas no sistema são: usuario senha123, mas você pode cadastrar novos através do comando manage.py createsuperuser.
 
 O projeto inclui uma bateria de testes automatizados que pode ser rodada com:
 - python manage.py test
