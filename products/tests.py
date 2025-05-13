@@ -1,17 +1,24 @@
 from django.test import TestCase
-from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from .models import Product
 from .serializers import ProductSerializer
-# Create your tests here.
+from django.contrib.auth.models import User
 
-class ProductAPITestCase(TestCase):
+
+
+class ProductAPITestCase(TestCase): 
     def setUp(self):
-        self.client = APIClient()
 
-        #Cria Produtos para testar
+        #Autenticação
+        self.user = User.objects.create_user(username='usuario', password='senha123')
+        self.client = APIClient()
+        response = self.client.post('/api/token/', {'username': 'usuario', 'password': 'senha123'}, format='json')
+        self.assertEqual(response.status_code, 200)
+        access_token = response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access_token)
+
         self.produto1 = Product.objects.create(name='Milho', price=10.00)
         self.produto2 = Product.objects.create(name='Soja', price=20.00)
         self.produto3 = Product.objects.create(name='Arroz', price=5)
