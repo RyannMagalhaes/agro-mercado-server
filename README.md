@@ -51,5 +51,19 @@ O endpoint de listagem de produtos é **cacheado por 10 minutos** usando o `LocM
 
 O projeto inclui uma bateria de testes automatizados:
 
+## 👀 Requisitos
+- Python 3.12 ou superior com pip
+
+## 🚀 Instalação e Execução
+- clone o repositório: https://github.com/RyannMagalhaes/agro-mercado-server.git
+- abra o prompt de comando na pasta do projeto 
+- execute o comando: o comando: pip install -r requirements.txt
+- execute as migrations: python manage.py migrate
+- inicie a aplicacao: python manage.py runserver
+
+O projeto inclui uma bateria de testes automatizados que pode ser rodada com:
+- python manage.py test
+
 ```bash
 python manage.py test
+
